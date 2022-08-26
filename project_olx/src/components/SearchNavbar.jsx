@@ -1,14 +1,16 @@
 import {
   Box,
+  Button,
   Container,
   Flex,
   HStack,
   Input,
   Select,
 } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { shadow } from "../Theme/theme.config";
 import Login from "./Login";
+import { UseModal } from "./Modal";
 
 export function SearchNavbar() {
   return (
@@ -77,7 +79,7 @@ export function SearchNavbar() {
               <option value="option2">हिन्दी</option>
             </Select>
             <Box fontFamily="textType">
-            <Login />
+              <UseModal />
             </Box>
             <Flex
               border="4px solid black"
@@ -105,5 +107,4 @@ export function SearchNavbar() {
       </Box>
     </Box>
   );
-  
 }

@@ -11,3 +11,4 @@ export function AppContextProvider({ children }) {
 
   return <AppContext.Provider value={state}>{children}</AppContext.Provider>;
 }
+

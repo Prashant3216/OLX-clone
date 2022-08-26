@@ -1,11 +1,13 @@
 import {
   Button,
   Container,
+  Divider,
   HStack,
   Input,
   InputGroup,
   InputLeftAddon,
   InputRightElement,
+  Show,
   Stack,
   Text,
   VStack,
@@ -15,7 +17,7 @@ import { loginShadow, shadow } from "../Theme/theme.config";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-export function LoginWithEmail() {
+export function Signup() {
   const [show, setShow] = useState(false);
   let handlePasswordShow = () => {
     setShow(!show);
@@ -32,7 +34,7 @@ export function LoginWithEmail() {
         fontFamily="texttype"
       >
         <Stack>
-          <Text align={"center"}>Enter your email id to login </Text>
+          <Text align={"center"}>Enter Email or Phone for SignUp</Text>
           <InputGroup>
             <InputLeftAddon
               children={<EmailIcon color="secondary" />}
@@ -41,6 +43,19 @@ export function LoginWithEmail() {
             <Input
               type="email"
               placeholder="Enter Email"
+              focusBorderColor="searchBorder"
+              bg="white"
+            />
+          </InputGroup>
+          <Text align={"center"}>OR</Text>
+          <InputGroup>
+            <InputLeftAddon
+              children={<PhoneIcon color="secondary" />}
+              bg="primary"
+            />
+            <Input
+              type="number"
+              placeholder="Enter Number"
               focusBorderColor="searchBorder"
               bg="white"
             />
@@ -69,19 +84,8 @@ export function LoginWithEmail() {
             color="white"
             _hover={{ bg: "searchBorder", color: "black" }}
           >
-            SignIn
+            SignUp
           </Button>
-          <Text>
-            No Account?{" "}
-            <NavLink
-              to="signup"
-              style={(isActive) => ({
-                color: isActive ? "purple" : "blue",
-              })}
-            >
-              Create Account
-            </NavLink>
-          </Text>
         </Stack>
       </Container>
     </>

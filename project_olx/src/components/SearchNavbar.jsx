@@ -14,7 +14,7 @@ import { UseModal } from "./Modal";
 
 export function SearchNavbar() {
   return (
-    <Box border="1px solid" borderColor="primary" pb={1} boxShadow={shadow}>
+    <Box border="1px solid" borderColor="primary" pb="3px" boxShadow={shadow}>
       <Box bg="primary">
         <Container maxW={1500}>
           <HStack p="10px 80px" spacing={3}>

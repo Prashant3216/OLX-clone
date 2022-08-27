@@ -9,6 +9,5 @@ export function postSignup(data) {
 export function getRequest(type) {
   return axios
     .get(`https://pv3216-json-mock.herokuapp.com/${type}`)
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+    
 }

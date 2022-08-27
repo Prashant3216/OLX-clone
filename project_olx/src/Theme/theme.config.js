@@ -18,4 +18,5 @@ export const theme=extendTheme({
 
 // export const searchTabBg="white"
 export const shadow="rgba(0, 0, 0, 0.15) 0px 3px 3px 0px"
+export const loginShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgb(209, 213, 219) 0px 0px 0px 1px inset"
 // export const searchBorder="#23e8e1"

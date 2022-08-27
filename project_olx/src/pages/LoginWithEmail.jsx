@@ -9,17 +9,50 @@ import {
   Stack,
   Text,
   VStack,
+  Spinner
 } from "@chakra-ui/react";
 import { PhoneIcon, AddIcon, WarningIcon, EmailIcon } from "@chakra-ui/icons";
 import { loginShadow, shadow } from "../Theme/theme.config";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState,useContext} from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { getRequest } from "../utilities/api";
+import { AppContext } from "../ContextAPI/ContextProvider";
+import { LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS } from "../ContextAPI/Actions";
+
+export const initForm = {
+  email: "",
+  password: "",
+};
 
 export function LoginWithEmail() {
+  const [form, setForm] = useState(initForm);
   const [show, setShow] = useState(false);
+  const {state, dispatch}=useContext(AppContext)
+  const Navigate=useNavigate()
+
   let handlePasswordShow = () => {
     setShow(!show);
   };
+
+  let handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  let AuthLogin = () => {
+    dispatch(LOGIN_REQUEST)
+    getRequest("posts")
+      .then((res) => {
+        let authData=res.data.filter(item=>(item.email===form.email && item.password===form.password))
+        authData ? dispatch(LOGIN_SUCCESS):dispatch(LOGIN_FAILURE)
+        alert("Logged in Successfully")
+        authData && Navigate("/")
+      })
+      .catch((err) => {console.log(err)
+        dispatch(LOGIN_FAILURE)});
+  };
+
+
   return (
     <>
       <Container
@@ -39,6 +72,8 @@ export function LoginWithEmail() {
               bg="primary"
             />
             <Input
+              onChange={handleChange}
+              name="email"
               type="email"
               placeholder="Enter Email"
               focusBorderColor="searchBorder"
@@ -57,6 +92,8 @@ export function LoginWithEmail() {
               </Button>
             </InputRightElement>
             <Input
+              onChange={handleChange}
+              name="password"
               type={show ? "text" : "password"}
               placeholder="Enter password"
               focusBorderColor="searchBorder"
@@ -65,12 +102,14 @@ export function LoginWithEmail() {
           </InputGroup>
 
           <Button
+            onClick={AuthLogin}
             bg="secondary"
             color="white"
             _hover={{ bg: "searchBorder", color: "black" }}
           >
-            SignIn
+            {state.isLoading ? <Spinner /> : "Login"}
           </Button>
+          {state.isError && <Text color="red">Incorrect Email or Password</Text>}
           <Text>
             No Account?{" "}
             <NavLink

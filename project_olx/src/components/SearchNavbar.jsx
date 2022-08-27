@@ -11,8 +11,17 @@ import { Link, NavLink } from "react-router-dom";
 import { shadow } from "../Theme/theme.config";
 import Login from "./Login";
 import { UseModal } from "./Modal";
+import {useContext} from "react"
+import { AppContext } from "../ContextAPI/ContextProvider";
+import { LOGOUT_REQUEST } from "../ContextAPI/Actions";
 
 export function SearchNavbar() {
+  const {state,dispatch}=useContext(AppContext)
+
+  let handleLogout=()=>{
+    dispatch(LOGOUT_REQUEST)
+    alert("Logged out Successfully")
+  }
   return (
     <Box border="1px solid" borderColor="primary" pb="3px" boxShadow={shadow}>
       <Box bg="primary">
@@ -79,7 +88,7 @@ export function SearchNavbar() {
               <option value="option2">हिन्दी</option>
             </Select>
             <Box fontFamily="textType">
-              <UseModal />
+              {state.isAuth?<Button onClick={handleLogout}>Logout</Button>:<UseModal />}
             </Box>
             <Flex
               border="4px solid black"

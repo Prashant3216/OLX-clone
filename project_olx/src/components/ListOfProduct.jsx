@@ -8,7 +8,7 @@ export function ListOfProduct({ data = [] }) {
     <Text mt="20" mb="20px" fontSize="2xl">Fresh Recommendations</Text>
     <SimpleGrid columns={[1,2,3,4]} spacingY='20px'>
       {data.map((item) => (
-        <Product product={item} />
+        <Product product={item} key={item.id}/>
       ))}
     </SimpleGrid>
     </Container>

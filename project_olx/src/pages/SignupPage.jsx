@@ -11,17 +11,58 @@ import {
   Stack,
   Text,
   VStack,
+  Spinner,
 } from "@chakra-ui/react";
 import { PhoneIcon, AddIcon, WarningIcon, EmailIcon } from "@chakra-ui/icons";
 import { loginShadow, shadow } from "../Theme/theme.config";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useState, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { postSignup } from "../utilities/api";
+import { AppContext } from "../ContextAPI/ContextProvider";
+import {
+  LOGIN_REQUEST,
+  SIGNUP_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+} from "../ContextAPI/Actions";
+
+export const initForm = {
+  email: "",
+  password: "",
+  number: "",
+};
 
 export function Signup() {
   const [show, setShow] = useState(false);
+  const [form, setForm] = useState();
+  const { state, dispatch } = useContext(AppContext);
+  const Navigate = useNavigate();
+  //   const [inputDisableToggle, setInputDisableToggle] = useState("");
   let handlePasswordShow = () => {
     setShow(!show);
   };
+
+  let handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({ ...form, [name]: value });
+  };
+
+  let handleSignup = () => {
+    dispatch(SIGNUP_REQUEST);
+    postSignup(form)
+      .then((res) => {
+        console.log(res);
+        dispatch(SIGNUP_SUCCESS);
+        alert("Signup Successfull! Please login");
+        form.email && Navigate("/login_with_email");
+        form.number && Navigate("/login_with_phone");
+      })
+      .catch((err) => {
+        dispatch(SIGNUP_FAILURE);
+        console.log(err);
+      });
+  };
+
   return (
     <>
       <Container
@@ -41,6 +82,12 @@ export function Signup() {
               bg="primary"
             />
             <Input
+              onChange={handleChange}
+              name="email"
+              //   onFocus={() => {
+              //     setInputDisableToggle(false);
+              //   }}
+              //   disabled={inputDisableToggle == true}
               type="email"
               placeholder="Enter Email"
               focusBorderColor="searchBorder"
@@ -54,7 +101,13 @@ export function Signup() {
               bg="primary"
             />
             <Input
+              onChange={handleChange}
+              name="number"
               type="number"
+              //   onFocus={() => {
+              //     setInputDisableToggle(true);
+              //   }}
+              //   disabled={inputDisableToggle == false}
               placeholder="Enter Number"
               focusBorderColor="searchBorder"
               bg="white"
@@ -72,6 +125,8 @@ export function Signup() {
               </Button>
             </InputRightElement>
             <Input
+              onChange={handleChange}
+              name="password"
               type={show ? "text" : "password"}
               placeholder="Enter password"
               focusBorderColor="searchBorder"
@@ -80,12 +135,16 @@ export function Signup() {
           </InputGroup>
 
           <Button
+            onClick={handleSignup}
             bg="secondary"
             color="white"
             _hover={{ bg: "searchBorder", color: "black" }}
           >
-            SignUp
+            {state.isLoading ? <Spinner /> : "SignUp"}
           </Button>
+          {state.isError && (
+            <Text color="red">somethng went wrong plaese try again</Text>
+          )}
         </Stack>
       </Container>
     </>

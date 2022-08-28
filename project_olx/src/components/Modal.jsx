@@ -17,7 +17,7 @@ export function UseModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <Button onClick={onOpen}>Login</Button>
+      <Button onClick={onOpen} bgColor="transparent">Login</Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

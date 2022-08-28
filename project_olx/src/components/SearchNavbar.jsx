@@ -23,7 +23,7 @@ export function SearchNavbar() {
     alert("Logged out Successfully")
   }
   return (
-    <Box border="1px solid" borderColor="primary" pb="3px" boxShadow={shadow}>
+    <Box border="1px solid" borderColor="primary" pb="3px" width="100%" boxShadow={shadow} bgColor="white" >
       <Box bg="primary">
         <Container maxW={1500}>
           <HStack p="10px 80px" spacing={3}>
@@ -88,7 +88,7 @@ export function SearchNavbar() {
               <option value="option2">हिन्दी</option>
             </Select>
             <Box fontFamily="textType">
-              {state.isAuth?<Button onClick={handleLogout}>Logout</Button>:<UseModal />}
+              {state.isAuth?<Button onClick={handleLogout} bgColor="transparent">Logout</Button>:<UseModal />}
             </Box>
             <Flex
               border="4px solid black"

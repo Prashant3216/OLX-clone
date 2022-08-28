@@ -7,8 +7,10 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-
+import { AppContext } from "../ContextAPI/ContextProvider";
+import { useContext } from "react";
 export function Product({ product }) {
+  const { state } = useContext(AppContext);
   return (
     <Box
       border="1px solid black"
@@ -16,7 +18,9 @@ export function Product({ product }) {
       p="9px"
       fontFamily="texttype"
       borderRadius="5px"
+      bgColor="white"
     >
+      
         <Stack spacing="4px">
           <Flex w="270px" h="160px" justify={"center"}>
             <Image src={product.image} alt={product.title} h="100%"></Image>
@@ -35,6 +39,7 @@ export function Product({ product }) {
             </Flex>
           </Flex>
         </Stack>
+
     </Box>
   );
 }

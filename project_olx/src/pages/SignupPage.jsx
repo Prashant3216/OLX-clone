@@ -37,7 +37,7 @@ export function Signup() {
   const [form, setForm] = useState();
   const { state, dispatch } = useContext(AppContext);
   const Navigate = useNavigate();
-  //   const [inputDisableToggle, setInputDisableToggle] = useState("");
+    const [inputDisableToggle, setInputDisableToggle] = useState("");
   let handlePasswordShow = () => {
     setShow(!show);
   };
@@ -84,10 +84,10 @@ export function Signup() {
             <Input
               onChange={handleChange}
               name="email"
-              //   onFocus={() => {
-              //     setInputDisableToggle(false);
-              //   }}
-              //   disabled={inputDisableToggle == true}
+                onFocus={() => {
+                  setInputDisableToggle("email");
+                }}
+                disabled={inputDisableToggle === "number"}
               type="email"
               placeholder="Enter Email"
               focusBorderColor="searchBorder"
@@ -104,10 +104,10 @@ export function Signup() {
               onChange={handleChange}
               name="number"
               type="number"
-              //   onFocus={() => {
-              //     setInputDisableToggle(true);
-              //   }}
-              //   disabled={inputDisableToggle == false}
+                onFocus={() => {
+                  setInputDisableToggle("number");
+                }}
+                disabled={inputDisableToggle === "email"}
               placeholder="Enter Number"
               focusBorderColor="searchBorder"
               bg="white"

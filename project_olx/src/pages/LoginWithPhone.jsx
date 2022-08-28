@@ -42,11 +42,19 @@ export function LoginWithPhone() {
   let AuthLogin = () => {
     dispatch(LOGIN_REQUEST)
     getRequest("posts")
-      .then((res) => {
+      .then((res) => { 
+        // console.log(res.data)
         let authData=res.data.filter(item=>(item.number===form.number && item.password===form.password))
-        authData ? dispatch(LOGIN_SUCCESS):dispatch(LOGIN_FAILURE)
+        // console.log(authData)
+        if(authData[0])
+        {dispatch(LOGIN_SUCCESS)
         alert("Logged in Successfully")
-        authData && Navigate("/")
+        Navigate("/")
+    }
+        else {
+            dispatch(LOGIN_FAILURE)
+        }
+        
       })
       .catch((err) => {console.log(err)
         dispatch(LOGIN_FAILURE)});

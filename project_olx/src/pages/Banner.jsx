@@ -10,6 +10,7 @@ export function Banner({hording}) {
       bgSize="cover"
       justify="center"
       align="center"
+      
     ></Flex>
   );
 }

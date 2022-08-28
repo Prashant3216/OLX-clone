@@ -1,16 +1,22 @@
-import { Box, Container, Flex, Image, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Flex,
+  Image,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 
 export function Footer() {
   return (
     <>
-   
       <Flex
         fontFamily="textType"
         bgColor="#ebeeef"
         justify="center"
         align="center"
       >
-        <SimpleGrid  spacingX="50px" columns={[1,3,4,5]} p="20px">
+        <SimpleGrid spacingX="50px" columns={[1, 3, 4, 5]} p="20px">
           <Flex direction="column" align="left">
             <Text as="b" fontSize="md" mb="12px">
               POPULAR LOCATIONS
@@ -141,7 +147,16 @@ export function Footer() {
         bgColor="secondary"
         justify="center"
         align="center"
-      ></Flex>
+      >
+        <SimpleGrid spacingX="400px" columns={[1, 2, 2, 2]} fontSize="12px">
+        <Flex color="white" gap="8px">
+          <Text as="b" >Other Countries</Text>
+          <Text>Pakistan </Text> <span> - </span><Text>South Africa </Text><span> - </span>
+          <Text>Indonesia</Text>
+        </Flex>
+        <Flex color="white" gap="8px"><Text as="b">Free Classifieds in India </Text><span>© 2006-2022 OLX</span></Flex>
+        </SimpleGrid>
+      </Flex>
     </>
   );
 }

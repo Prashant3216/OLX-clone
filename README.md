@@ -7,7 +7,7 @@ The OLX marketplace is a platform for buying and selling services and goods such
 
  
 
-## Authors
+## Author
 
 - [Prashant Verma](https://github.com/Prashant3216)
 #
